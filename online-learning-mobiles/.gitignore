@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules/
+/node_modules
 
 # Expo
 .expo/
@@ -15,6 +16,8 @@ web-build/
 *.p12
 *.key
 *.mobileprovision
+package-lock.json
+node_modules
 
 # Metro
 .metro-health-check*
