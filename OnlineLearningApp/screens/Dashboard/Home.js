@@ -13,7 +13,6 @@ import { connect } from "react-redux";
 import {
     IconButton,
     TextButton,
-    // HorizontalCourseCard,
     LineDivider,
     CategoryCard
 } from "../../components";
@@ -88,7 +87,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.h2
                         }}
                     >
-                        Hello, ByProgrammers!
+                        Hello, Jessica!
                     </Text>
                     <Text
                         style={{
@@ -96,7 +95,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.body3
                         }}
                     >
-                        Thursday, 9th Sep 2021
+                        Thursday, 18th Oct 2022
                     </Text>
                 </View>
 
@@ -142,7 +141,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.h2
                         }}
                     >
-                        Make your brand more visible with our checklist.
+                        learning React Native by yourself ?
                     </Text>
 
                     <Text
@@ -152,7 +151,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.body4
                         }}
                     >
-                        By Scott Harris
+                        By Jessica Lang
                     </Text>
                 </View>
 

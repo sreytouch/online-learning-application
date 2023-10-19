@@ -6,27 +6,27 @@ const categories = [
     },
     {
         id: 1,
-        title: "3D Modeling",
+        title: "Algorithems",
         thumbnail: require("../assets/images/bg_2.png")
     },
     {
         id: 2,
-        title: "Web Designing",
+        title: "Cloud Computing",
         thumbnail: require("../assets/images/bg_3.png")
     },
     {
         id: 3,
-        title: "Illustrations",
+        title: "Design Pattern",
         thumbnail: require("../assets/images/bg_4.png")
     },
     {
         id: 4,
-        title: "Drawing",
+        title: "Backend",
         thumbnail: require("../assets/images/bg_5.png")
     },
     {
         id: 5,
-        title: "Animation",
+        title: "Fronted",
         thumbnail: require("../assets/images/bg_6.png")
     }
 ]
@@ -142,7 +142,7 @@ const course_details = {
     number_of_students: "33.5k Students",
     duration: "2h 30m",
     instructor: {
-        name: "ByProgrammers",
+        name: "Sreytouch",
         title: "Full Stack Programmer"
     },
     videos: [
@@ -213,21 +213,21 @@ const course_details = {
         {
             id: 0,
             name: "UI Fundamentals",
-            author: "Shared by ByProgrammers",
+            author: "Shared by Dummy Data",
             upload_date: "13th Sep 2021",
             thumbnail: require("../assets/images/pdf.png")
         },
         {
             id: 1,
             name: "UX Checklist",
-            author: "Shared by ByProgrammers",
+            author: "Shared by Dummy Data",
             upload_date: "11th Sep 2021",
             thumbnail: require("../assets/images/doc.png")
         },
         {
             id: 2,
             name: "Sketch File",
-            author: "Shared by ByProgrammers",
+            author: "Shared by Dummy Data",
             upload_date: "7th Sep 2021",
             thumbnail: require("../assets/images/sketch.png")
         }
@@ -236,7 +236,7 @@ const course_details = {
         {
             id: 0,
             profile: require("../assets/images/profile.png"),
-            name: "ByProgrammers",
+            name: "Dummy Data",
             no_of_comments: "11 comments",
             no_of_likes: "72 likes",
             posted_on: "5 days ago",
@@ -245,28 +245,28 @@ const course_details = {
                 {
                     id: 0,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "4 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
                 {
                     id: 1,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "4 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
                 {
                     id: 2,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "4 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
                 {
                     id: 3,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "4 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
@@ -275,7 +275,7 @@ const course_details = {
         {
             id: 1,
             profile: require("../assets/images/profile.png"),
-            name: "ByProgrammers",
+            name: "Dummy Data",
             no_of_comments: "21 comments",
             no_of_likes: "372 likes",
             posted_on: "14 days ago",
@@ -284,21 +284,21 @@ const course_details = {
                 {
                     id: 0,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "7 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
                 {
                     id: 1,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "7 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
                 {
                     id: 2,
                     profile: require("../assets/images/student_1.png"),
-                    name: "ByProgrammers",
+                    name: "Dummy Data",
                     posted_on: "7 days ago",
                     comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 },
@@ -392,7 +392,7 @@ const membershipPans = [
 
 const instructorProfile = {
     id: 1,
-    name: "ByProgrammers",
+    name: "Dummy Data",
     title: "Full Stack Programmers",
     avatar: require("../assets/images/profile.png"),
     isVerified: true,
@@ -427,7 +427,7 @@ const instructorProfile = {
             id: 0,
             title: "The Ultimate Ui/Ux Course Beginner to Advanced",
             duration: "2h 30m",
-            instructor: "ByProgrammers",
+            instructor: "Dummy Data",
             ratings: 4.9,
             price: 75,
             thumbnail: require("../assets/images/thumbnail_1.png")
@@ -436,7 +436,7 @@ const instructorProfile = {
             id: 1,
             title: "The Ultimate Ui/Ux Course Beginner to Advanced",
             duration: "2h 30m",
-            instructor: "ByProgrammers",
+            instructor: "Dummy Data",
             ratings: 4.9,
             price: 75,
             thumbnail: require("../assets/images/thumbnail_2.png")
@@ -445,7 +445,7 @@ const instructorProfile = {
             id: 2,
             title: "The Ultimate Ui/Ux Course Beginner to Advanced",
             duration: "2h 30m",
-            instructor: "ByProgrammers",
+            instructor: "Dummy Data",
             ratings: 4.9,
             price: 75,
             thumbnail: require("../assets/images/thumbnail_3.png")
@@ -454,7 +454,7 @@ const instructorProfile = {
             id: 3,
             title: "The Ultimate Ui/Ux Course Beginner to Advanced",
             duration: "2h 30m",
-            instructor: "ByProgrammers",
+            instructor: "Dummy Data",
             ratings: 4.9,
             price: 75,
             thumbnail: require("../assets/images/thumbnail_4.png")

@@ -94,44 +94,6 @@ const Login = ({ navigation, appTheme }) => {
                     or login with
                 </Text>
 
-                {/* Social Logins */}
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        height: 60,
-                        marginTop: SIZES.radius
-                    }}
-                >
-                    <IconLabelButton
-                        icon={icons.google}
-                        label="Google"
-                        containerStyle={{
-                            flex: 1,
-                            borderRadius: 30,
-                            backgroundColor: COLORS.additionalColor9
-                        }}
-                        iconStyle={{
-                            width: 30,
-                            height: 30,
-                        }}
-                    />
-
-                    <IconLabelButton
-                        icon={icons.facebook}
-                        label="Facebook"
-                        containerStyle={{
-                            flex: 1,
-                            marginLeft: SIZES.padding,
-                            borderRadius: 30,
-                            backgroundColor: COLORS.additionalColor9
-                        }}
-                        iconStyle={{
-                            width: 30,
-                            height: 30,
-                        }}
-                    />
-                </View>
-
                 {/* Sign Up */}
                 <View
                     style={{

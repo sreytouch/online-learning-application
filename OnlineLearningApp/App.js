@@ -1,7 +1,6 @@
 import React from "react";
 import { Easing } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -18,7 +17,6 @@ import {
     CourseDetails,
 
     Notification,
-    Membership,
     InstructorProfile,
 
     PopularCourses,
@@ -29,7 +27,6 @@ import {
 import MainLayout from "./screens/Dashboard/MainLayout"
 import { useFonts } from 'expo-font';
 
-//const Stack = createNativeStackNavigator();
 const Stack = createSharedElementStackNavigator();
 const options = {
     gestureEnabled: false,
@@ -129,11 +126,6 @@ const App = () => {
                     <Stack.Screen
                         name="Notification"
                         component={Notification}
-                    />
-
-                    <Stack.Screen
-                        name="Membership"
-                        component={Membership}
                     />
 
                     <Stack.Screen

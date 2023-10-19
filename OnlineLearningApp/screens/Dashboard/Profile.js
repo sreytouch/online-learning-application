@@ -89,7 +89,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                     }}
                 >
                     <Image
-                        source={images.profile}
+                        source={images.student_3}
                         style={{
                             width: "100%",
                             height: "100%",
@@ -145,7 +145,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                             ...FONTS.h2
                         }}
                     >
-                        ByProgrammers
+                        Jessica Lang
                     </Text>
 
                     <Text
@@ -159,7 +159,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
 
                     {/* Progress */}
                     <ProgressBar
-                        progress="58%"
+                        progress="99%"
                         containerStyle={{
                             marginTop: SIZES.radius
                         }}
@@ -188,28 +188,12 @@ const Profile = ({ appTheme, toggleTheme }) => {
                             58%
                         </Text>
                     </View>
-
-                    {/* Member */}
-                    <TextButton
-                        label="+ Become Member"
-                        contentContainerStyle={{
-                            height: 35,
-                            marginTop: SIZES.padding,
-                            paddingHorizontal: SIZES.radius,
-                            borderRadius: 20,
-                            backgroundColor: appTheme?.backgroundColor4
-                        }}
-                        labelStyle={{
-                            color: appTheme?.textColor2
-                        }}
-                        onPress={()=> navigation.navigate('Membership')}
-                    />
                 </View>
             </View>
         )
     }
 
-    function renderProfileSection1() {
+    function renderProfileSection() {
         return (
             <View
                 style={styles.profileSectionContainer}
@@ -217,7 +201,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.profile}
                     label="Name"
-                    value="ByProgrammers"
+                    value="Jessica Lang"
                 />
 
                 <LineDivider />
@@ -225,7 +209,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.email}
                     label="Email"
-                    value="byprogrammers@gmail.com"
+                    value="sreytouch.lang95@gmail.com"
                 />
 
                 <LineDivider />
@@ -233,7 +217,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.password}
                     label="Password"
-                    value="Updated 2 weeks ago"
+                    value="*********"
                 />
 
                 <LineDivider />
@@ -242,41 +226,6 @@ const Profile = ({ appTheme, toggleTheme }) => {
                     icon={icons.call}
                     label="Contact Number"
                     value="+60123456789"
-                />
-            </View>
-        )
-    }
-
-    function renderProfileSection2() {
-        return (
-            <View
-                style={styles.profileSectionContainer}
-            >
-                <ProfileValue
-                    icon={icons.star_1}
-                    value="Page"
-                />
-
-                <LineDivider />
-
-                <ProfileRadioButton
-                    icon={icons.new_icon}
-                    label="New Course Notifications"
-                    isSelected={newCourseNotification}
-                    onPress={() => {
-                        setNewCourseNotification(!newCourseNotification)
-                    }}
-                />
-
-                <LineDivider />
-
-                <ProfileRadioButton
-                    icon={icons.reminder}
-                    label="Study Reminder"
-                    isSelected={studyReminder}
-                    onPress={() => {
-                        setStudyReminder(!studyReminder)
-                    }}
                 />
             </View>
         )
@@ -299,9 +248,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
             >
                 {renderProfileCard()}
 
-                {renderProfileSection1()}
-
-                {renderProfileSection2()}
+                {renderProfileSection()}
             </ScrollView>
         </View>
     )

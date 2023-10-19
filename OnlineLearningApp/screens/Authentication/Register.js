@@ -96,32 +96,6 @@ const Register = ({ navigation, appTheme }) => {
     const [password, setPassword] = useState("")
     const [showPass, setShowPass] = useState(false)
 
-    function renderOptions() {
-        return (
-            <View
-                style={{
-                    flexDirection: 'row',
-                    marginTop: SIZES.height > 800 ? SIZES.padding : SIZES.radius
-                }}
-            >
-                {constants.register_options.map((item, index) => {
-                    return (
-                        <Option
-                            key={`Options-${index}`}
-                            label={item.label}
-                            isSelected={item.id == selectedOption}
-                            containerStyle={{
-                                marginLeft: index != 0 ? SIZES.radius : 0
-                            }}
-                            onPress={() => setSelectOption(item.id)}
-                            appTheme={appTheme}
-                        />
-                    )
-                })}
-            </View>
-        )
-    }
-
     function renderForm() {
         return (
             <View
@@ -218,44 +192,6 @@ const Register = ({ navigation, appTheme }) => {
                     or sign up with
                 </Text>
 
-                {/* Social Logins */}
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        height: 60,
-                        marginTop: SIZES.radius
-                    }}
-                >
-                    <IconLabelButton
-                        icon={icons.google}
-                        label="Google"
-                        containerStyle={{
-                            flex: 1,
-                            borderRadius: 30,
-                            backgroundColor: COLORS.additionalColor9
-                        }}
-                        iconStyle={{
-                            width: 30,
-                            height: 30,
-                        }}
-                    />
-
-                    <IconLabelButton
-                        icon={icons.facebook}
-                        label="Facebook"
-                        containerStyle={{
-                            flex: 1,
-                            marginLeft: SIZES.padding,
-                            borderRadius: 30,
-                            backgroundColor: COLORS.additionalColor9
-                        }}
-                        iconStyle={{
-                            width: 30,
-                            height: 30,
-                        }}
-                    />
-                </View>
-
                 {/* Sign Up */}
                 <View
                     style={{
@@ -315,10 +251,10 @@ const Register = ({ navigation, appTheme }) => {
                 enableResetScrollToCoords={false}
                 contentContainerStyle={{
                     flex: 1,
+                    marginTop: 100,
                     paddingHorizontal: 30,
                 }}
             >
-                {renderOptions()}
                 {renderForm()}
                 {renderButtons()}
             </KeyboardAwareScrollView>

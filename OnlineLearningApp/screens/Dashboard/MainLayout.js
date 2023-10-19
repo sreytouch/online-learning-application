@@ -12,8 +12,7 @@ import { connect } from "react-redux";
 import {
     Home,
     Profile,
-    Search,
-    PromoModal
+    Search
 } from "../../screens";
 import { COLORS, SIZES, FONTS, constants } from '../../constants';
 
@@ -128,8 +127,6 @@ const Tabs = ({ scrollX, onBottomTabPress }) => {
 
 const MainLayout = ({ navigation, appTheme }) => {
 
-    const [promoModalVisible, setPromoModalVisible] = React.useState(false);
-
     const flatListRef = React.useRef()
     const scrollX = React.useRef(new Animated.Value(0)).current;
 
@@ -138,12 +135,6 @@ const MainLayout = ({ navigation, appTheme }) => {
             offset: bottomTabIndex * SIZES.width
         })
     })
-
-    React.useEffect(() => {
-        setTimeout(() => {
-            setPromoModalVisible(true);
-        }, 500)
-    }, []);
 
     function renderContent() {
         return (
@@ -231,18 +222,6 @@ const MainLayout = ({ navigation, appTheme }) => {
 
             {/* Footer */}
             {renderBottomTab()}
-
-            <PromoModal
-                visible={promoModalVisible}
-                onClose={(navigateTo) => {
-                    setPromoModalVisible(false)
-                    if (navigateTo) {
-                        setTimeout(() => {
-                            navigation.navigate(navigateTo);
-                        }, 500)
-                    }
-                }}
-            />
         </View>
     )
 }
