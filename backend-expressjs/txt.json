@@ -1,0 +1,20 @@
+[{
+    "firstName": "Sreytouch",
+    "middleName": "",
+    "lastName": "Lang",
+    "email": "sreytouch@gmail.com",
+    "phone": "987654321",
+    "password": "sreytouchlang",
+    "gender": "F",
+    "role": "user"
+},
+{
+    "firstName": "Jessci",
+    "middleName": "",
+    "lastName": "Lang",
+    "email": "slang@gmail.com",
+    "phone": "123456789",
+    "password": "jessica",
+    "gender": "F",
+    "role": "Admin"
+}]

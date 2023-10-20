@@ -4,7 +4,7 @@ const Role = require('../_helpers/roles');
 const UserService = require('../services/userService');
 async function getAllUsers(req, res, next) {
     try {
-        const users = await User.find().select({ password: 0 });
+        const users = await User.find();
         res.status(200).json({
             message: 'All users retrieved successfully',
             data: users
@@ -16,12 +16,12 @@ async function getAllUsers(req, res, next) {
 
 async function getUserById(req, res, next) {
     try {
-        const currentUser = req.user;
         const userID = req.params.id;
-        if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
-        const user = await User.findById(userID).select({ password: 0 });
+        // const currentUser = req.user;
+        // if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
+        const user = await User.findById(userID);
         res.status(200).json({
             message: `User retrieved successfully`,
             data: user
@@ -59,11 +59,11 @@ async function createUser(req, res, next) {
 
 async function updateUser(req, res, next) {
     try {
-        const currentUser = req.user;
         const userID = req.params.id;
-        if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
+        // const currentUser = req.user;
+        // if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
         const user = await User.findByIdAndUpdate(userID, req.body, { new: true });
         res.status(200).json({
             message: `User updated successfully`,
@@ -76,11 +76,11 @@ async function updateUser(req, res, next) {
 
 async function deleteUser(req, res, next) {
     try {
-        const currentUser = req.user;
         const userID = req.params.id;
-        if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
+        // const currentUser = req.user;
+        // if (userID !== currentUser.user_id && currentUser.role !== Role.Admin) {
+        //     return res.status(401).json({ message: 'Unauthorized' });
+        // }
         const user = await User.findByIdAndDelete(userID);
         res.status(200).json({
             message: `User deleted successfully`,
