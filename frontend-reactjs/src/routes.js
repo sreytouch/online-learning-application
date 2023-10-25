@@ -6,7 +6,12 @@ import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-
+import Category from "layouts/categories";
+import CategoryAdd from "layouts/categories/create";
+import CategoryEdit from "layouts/categories/update";
+import Course from "layouts/courses";
+import CourseAdd from "layouts/courses/create";
+import CourseEdit from "layouts/courses/update";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -20,52 +25,100 @@ const routes = [
     component: <Dashboard />,
   },
   {
-    type: "collapse",
-    name: "Tables",
+    // type: "collapse",
+    // name: "Tables",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    // icon: <Icon fontSize="small">table_view</Icon>,
     route: "/tables",
     component: <Tables />,
   },
   {
-    type: "collapse",
-    name: "Billing",
+    // type: "collapse",
+    // name: "Billing",
     key: "billing",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
+    // icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/billing",
     component: <Billing />,
   },
   {
-    type: "collapse",
-    name: "Notifications",
+    // type: "collapse",
+    // name: "Notifications",
     key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
+    // icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
   },
   {
-    type: "collapse",
-    name: "Profile",
+    // type: "collapse",
+    // name: "Profile",
     key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
+    // icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
   },
   {
-    type: "collapse",
-    name: "Sign In",
+    // type: "collapse",
+    // name: "Sign In",
     key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
+    // icon: <Icon fontSize="small">login</Icon>,
     route: "/",
     component: <SignIn />,
   },
   {
-    type: "collapse",
-    name: "Sign Up",
+    // type: "collapse",
+    // name: "Sign Up",
     key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
+    // icon: <Icon fontSize="small">assignment</Icon>,
     route: "/sign-up",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    name: "Category",
+    key: "category",
+    icon: <Icon fontSize="small">category</Icon>,
+    route: "/category",
+    component: <Category />,
+  },
+  {
+    // type: "collapse",
+    // name: "Category",
+    key: "category",
+    // icon: <Icon fontSize="small">category</Icon>,
+    route: "/category/add",
+    component: <CategoryAdd />,
+  },
+  {
+    // type: "collapse",
+    // name: "Category",
+    key: "category",
+    // icon: <Icon fontSize="small">category</Icon>,
+    route: "/category/edit",
+    component: <CategoryEdit />,
+  },
+  {
+    type: "collapse",
+    name: "Course",
+    key: "course",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/course",
+    component: <Course />,
+  },
+  {
+    // type: "collapse",
+    // name: "Category",
+    key: "course",
+    // icon: <Icon fontSize="small">course</Icon>,
+    route: "/course/add",
+    component: <CourseAdd />,
+  },
+  {
+    // type: "collapse",
+    // name: "course",
+    key: "course",
+    // icon: <Icon fontSize="small">course</Icon>,
+    route: "/course/edit",
+    component: <CourseEdit />,
   },
 ];
 

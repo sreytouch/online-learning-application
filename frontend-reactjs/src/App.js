@@ -131,7 +131,7 @@ export default function App() {
     </MDBox>
   );
 
-  console.log("---direction---", direction);
+  // console.log("---direction---", direction);
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>

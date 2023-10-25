@@ -1,18 +1,11 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import axios from "axios";
 
 // @mui material components
-import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
-import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
-
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
+import { Card, Switch, Grid, MuiLink, TextField, Button } from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -26,11 +19,44 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
-function Basic() {
+import baseURL from "service/baseURL";
+
+const SignIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [authenticated, setauthenticated] = useState(null);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    setEmailError(false);
+    setPasswordError(false);
+
+    if (email == "") {
+      setEmailError(true);
+    }
+    if (password == "") {
+      setPasswordError(true);
+    }
+
+    await axios
+      .post(`${baseURL}/users/login`, {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        setauthenticated(response.data);
+        localStorage.setItem("token", response.data);
+      });
+  };
+  if (authenticated !== null) {
+    return <Navigate replace to="/dashboard" />;
+  }
   return (
     <BasicLayout image={bgImage}>
       <Card>
@@ -50,12 +76,32 @@ function Basic() {
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <MDBox component="form" role="form" onSubmit={handleSubmit}>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput
+                label="Email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                variant="outlined"
+                color="secondary"
+                type="email"
+                fullWidth
+                value={email}
+                error={emailError}
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+              <MDInput
+                label="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                variant="outlined"
+                color="secondary"
+                type="password"
+                value={password}
+                error={passwordError}
+                fullWidth
+              />
             </MDBox>
             <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -70,7 +116,7 @@ function Basic() {
               </MDTypography>
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+              <MDButton variant="gradient" color="info" fullWidth type="submit">
                 sign in
               </MDButton>
             </MDBox>
@@ -79,7 +125,7 @@ function Basic() {
                 Don&apos;t have an account?{" "}
                 <MDTypography
                   component={Link}
-                  to="/authentication/sign-up"
+                  to="/sign-up"
                   variant="button"
                   color="info"
                   fontWeight="medium"
@@ -94,6 +140,6 @@ function Basic() {
       </Card>
     </BasicLayout>
   );
-}
+};
 
-export default Basic;
+export default SignIn;
