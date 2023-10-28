@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import IconButton from "@mui/material/IconButton";
 import { Link, Navigate } from "react-router-dom";
 
 // Material Dashboard 2 React components
@@ -34,10 +35,10 @@ function Category() {
                 borderRadius="lg"
                 coloredShadow="info"
               >
-                <MDTypography variant="h6" color="white">
-                  List Categories
-                </MDTypography>
-                <MDTypography display="block" variant="h6" color="white">
+                <MDBox pr={1}>
+                  <MDTypography variant="h6" color="white">
+                    List Categories
+                  </MDTypography>
                   <MDBadge
                     component={Link}
                     to="/category/add"
@@ -45,8 +46,9 @@ function Category() {
                     color="success"
                     variant="gradient"
                     size="lg"
+                    style={{ position: "absolute", top: 0, right: "30px" }}
                   />
-                </MDTypography>
+                </MDBox>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable

@@ -97,9 +97,6 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
-      console.log("==route.route", route.route);
-      console.log("==route.component", route.component);
-      console.log("==route.key", route.key);
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
@@ -187,7 +184,6 @@ export default function App() {
     </ThemeProvider>
   ) : (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
       <Routes>
         <Route path="/" element={<SignIn />} key="sign-in" />
       </Routes>

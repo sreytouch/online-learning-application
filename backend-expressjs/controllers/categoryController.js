@@ -1,6 +1,10 @@
 const Category = require('../models/categoryModels');
 const Role = require('../_helpers/roles');
 const categoryService = require('../services/categoryService');
+const fs = require("fs");
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+
 async function getAllCategory(req, res, next) {
     try {
         const categories = await Category.find();
@@ -30,24 +34,37 @@ async function getCategoryById(req, res, next) {
 // Todo: parse the req.body only allow roles to be added by admin
 async function createCategory(req, res, next) {
     try {
-        const { title, typeCategory, price, dateTime, author, contants, rate, pictureUrls } = req.body;
-        const categoryData = {
-            title: title,
-            typeCategory: typeCategory,
-            price: price,
-            dateTime: dateTime,
-            author: author,
-            contants: contants,
-            rate: rate,
-            pictureUrls: pictureUrls
-        }
-        await categoryService.addNewCategory(categoryData).then(category => {
+        const { title, pictureUrls } = req.body;
+        // const categoryData = {
+        //     title: title,
+        //     pictureUrls: pictureUrls
+        // }
+        // await categoryService.addNewCategory(categoryData).then(category => {
+        //     res.status(201).json({
+        //         message: `Category created successfully`,
+        //         data: category
+        //     });
+        // }).catch(err => {
+        //     throw err;
+        // });
+
+        await uploadFile(req.file).then(async (result) => {
+            const category = await Category.create({
+                title: title,
+                pictureUrls: [result.Location]
+            });
+            // Deleting from local if uploaded in S3 bucket
+            await unlinkFile(req.file.path);
             res.status(201).json({
                 message: `Category created successfully`,
                 data: category
             });
         }).catch(err => {
-            throw err;
+            console.log(err);
+            res.status(201).json({
+                message: `Problem uploading file`,
+                error: true
+            });
         });
     } catch (err) {
         next(err);

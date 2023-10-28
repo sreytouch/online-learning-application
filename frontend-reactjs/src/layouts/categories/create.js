@@ -16,19 +16,63 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
+import baseURL from "service/baseURL";
+
 function Create() {
   const [title, setTitle] = useState("");
-  const [icon, setIcon] = useState("");
+  const [logo, setLogo] = useState("");
   const [decription, setDecription] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post(`${baseURL}/users/login`, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {});
+    // await axios
+    //   .get(`${baseURL}/categories`)
+    //   .then((response) => {
+    //     console.log("==response==", response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+
+    try {
+      const response = await axios({
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+        url: `${baseURL}/categories`,
+      });
+
+      if (response.status === 200) {
+        console.log("==response==", response);
+        return response.data;
+      }
+    } catch (error) {
+      console.error("==error==", error);
+      throw error;
+    }
+
+    // try {
+    //   await axios
+    //     .post(
+    //       `${baseURL}/categories`,
+    //       {
+    //         title: title,
+    //         logo: logo,
+    //       },
+    //       {
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //       }
+    //     )
+    //     .then((response) => {
+    //       console.log("---response--", response);
+    //     });
+    // } catch (error) {
+    //   console.error(error.response.data);
+    // }
   };
   return (
     <DashboardLayout>
@@ -53,17 +97,18 @@ function Create() {
                       value={title}
                     />
                   </MDBox>
+                  <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
-                      Icon:
+                      Logo:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setIcon(e.target.value)}
-                      required
+                      onChange={(e) => setLogo(e.target.value)}
                       variant="outlined"
                       color="secondary"
                       type="file"
-                      value={icon}
+                      accept="image/png, image/jpeg"
+                      value={logo}
                       fullWidth
                     />
                   </MDBox>
@@ -73,7 +118,6 @@ function Create() {
                     </MDTypography>
                     <MDInput
                       onChange={(e) => setDecription(e.target.value)}
-                      required
                       variant="outlined"
                       color="secondary"
                       type="text"

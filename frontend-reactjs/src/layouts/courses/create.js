@@ -18,7 +18,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function Create() {
   const [title, setTitle] = useState("");
-  const [icon, setIcon] = useState("");
+  const [image, setImage] = useState("");
   const [decription, setDecription] = useState("");
 
   const handleSubmit = async (event) => {
@@ -55,15 +55,15 @@ function Create() {
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
-                      Icon:
+                      image:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setIcon(e.target.value)}
+                      onChange={(e) => setImage(e.target.value)}
                       required
                       variant="outlined"
                       color="secondary"
                       type="file"
-                      value={icon}
+                      value={image}
                       fullWidth
                     />
                   </MDBox>

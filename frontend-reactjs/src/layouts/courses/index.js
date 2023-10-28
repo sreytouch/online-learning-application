@@ -45,6 +45,7 @@ function Course() {
                     color="success"
                     variant="gradient"
                     size="lg"
+                    style={{ position: "absolute", top: 0, right: "30px" }}
                   />
                 </MDTypography>
               </MDBox>
