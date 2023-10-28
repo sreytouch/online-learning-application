@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -34,6 +34,7 @@ import routes from "routes";
 // Material Dashboard 2 React contexts
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
+import SignIn from "layouts/authentication/sign-in";
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
@@ -96,6 +97,9 @@ export default function App() {
 
   const getRoutes = (allRoutes) =>
     allRoutes.map((route) => {
+      console.log("==route.route", route.route);
+      console.log("==route.component", route.component);
+      console.log("==route.key", route.key);
       if (route.collapse) {
         return getRoutes(route.collapse);
       }
@@ -131,7 +135,7 @@ export default function App() {
     </MDBox>
   );
 
-  // console.log("---direction---", direction);
+  const token = localStorage.getItem("token");
 
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
@@ -158,7 +162,7 @@ export default function App() {
         </Routes>
       </ThemeProvider>
     </CacheProvider>
-  ) : (
+  ) : token ? (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
       {layout === "dashboard" && (
@@ -179,6 +183,13 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider theme={darkMode ? themeDark : theme}>
+      <CssBaseline />
+      <Routes>
+        <Route path="/" element={<SignIn />} key="sign-in" />
       </Routes>
     </ThemeProvider>
   );

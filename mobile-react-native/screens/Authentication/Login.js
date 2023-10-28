@@ -79,7 +79,7 @@ const Login = ({ navigation, appTheme }) => {
                         backgroundColor: COLORS.primary
                     }}
                     label="LOGIN"
-                    onPress={() => navigation.navigate("Walkthrough")}
+                    // onPress={() => navigation.navigate("Walkthrough")}
                 />
 
                 {/* Divider */}

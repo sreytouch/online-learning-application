@@ -52,6 +52,10 @@ const SignIn = () => {
       .then((response) => {
         setauthenticated(response.data);
         localStorage.setItem("token", response.data);
+      })
+      .catch((e) => {
+        console.log("==e", e);
+        alert(e.message);
       });
   };
   if (authenticated !== null) {
