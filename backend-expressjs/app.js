@@ -5,7 +5,7 @@ const app = express();
 require('dotenv').config()
 
 mongoose.connect(`${process.env.MONGO_URL}`, { useNewUrlParser: true });
-mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', false);
 
 app.use(express.json());
 app.use(cors({
