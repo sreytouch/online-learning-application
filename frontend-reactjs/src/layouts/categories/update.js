@@ -23,12 +23,6 @@ function Update() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await axios
-      .post(`${baseURL}/users/login`, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {});
   };
   return (
     <DashboardLayout>

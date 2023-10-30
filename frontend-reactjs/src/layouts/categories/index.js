@@ -2,6 +2,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import { Link, Navigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -16,8 +17,22 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import categoryTableData from "layouts/tables/data/categoryTableData";
 
+// call service
+import CategoryService from "service/categoryService";
+
 function Category() {
   const { columns, rows } = categoryTableData();
+
+  useEffect(() => {
+    loadCategory();
+  }, []);
+
+  console.log("===CategoryService==", CategoryService.getAll());
+  const loadCategory = async () => {
+    const response = await CategoryService.getAll();
+    console.log("fetchCategory http ===>", response.data.data);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />

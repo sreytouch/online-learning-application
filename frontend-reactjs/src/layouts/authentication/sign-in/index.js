@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+// import axios from "axios";
 
 // @mui material components
 import { Card, Switch, Grid, MuiLink, TextField, Button } from "@mui/material";
@@ -19,48 +19,35 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 
-import baseURL from "service/baseURL";
+// call service
+import { loginService } from "service/authService";
 
 const SignIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [authenticated, setauthenticated] = useState(null);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    setEmailError(false);
-    setPasswordError(false);
-
-    if (email == "") {
-      setEmailError(true);
+    const form = new FormData(event.currentTarget);
+    const body = {};
+    for (const [key, value] of form.entries()) {
+      body[key] = value;
     }
-    if (password == "") {
-      setPasswordError(true);
-    }
-
-    await axios
-      .post(`${baseURL}/users/login`, {
-        email: email,
-        password: password,
-      })
-      .then((response) => {
-        setauthenticated(response.data);
-        localStorage.setItem("token", response.data);
+    loginService(body)
+      .then((res) => {
+        if (res.status === 200) {
+          localStorage.setItem("isLogin", true);
+          const token = res.data.token;
+          localStorage.setItem("token", JSON.stringify(token));
+          navigate("/dashboard");
+        }
       })
       .catch((e) => {
-        console.log("==e", e);
         alert(e.message);
       });
   };
-  if (authenticated !== null) {
-    return <Navigate replace to="/dashboard" />;
-  }
   return (
     <BasicLayout image={bgImage}>
       <Card>
@@ -84,26 +71,22 @@ const SignIn = () => {
             <MDBox mb={2}>
               <MDInput
                 label="Email"
-                onChange={(e) => setEmail(e.target.value)}
                 required
                 variant="outlined"
                 color="secondary"
                 type="email"
                 fullWidth
-                value={email}
-                error={emailError}
+                name="email"
               />
             </MDBox>
             <MDBox mb={2}>
               <MDInput
                 label="Password"
-                onChange={(e) => setPassword(e.target.value)}
                 required
                 variant="outlined"
                 color="secondary"
                 type="password"
-                value={password}
-                error={passwordError}
+                name="password"
                 fullWidth
               />
             </MDBox>

@@ -16,8 +16,6 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
-import baseURL from "service/baseURL";
-
 function Create() {
   const [title, setTitle] = useState("");
   const [logo, setLogo] = useState("");
@@ -25,14 +23,6 @@ function Create() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // await axios
-    //   .get(`${baseURL}/categories`)
-    //   .then((response) => {
-    //     console.log("==response==", response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
 
     try {
       const response = await axios({
@@ -52,27 +42,6 @@ function Create() {
       console.error("==error==", error);
       throw error;
     }
-
-    // try {
-    //   await axios
-    //     .post(
-    //       `${baseURL}/categories`,
-    //       {
-    //         title: title,
-    //         logo: logo,
-    //       },
-    //       {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //       }
-    //     )
-    //     .then((response) => {
-    //       console.log("---response--", response);
-    //     });
-    // } catch (error) {
-    //   console.error(error.response.data);
-    // }
   };
   return (
     <DashboardLayout>
@@ -97,7 +66,7 @@ function Create() {
                       value={title}
                     />
                   </MDBox>
-                  <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                  {/* <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" /> */}
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
                       Logo:
