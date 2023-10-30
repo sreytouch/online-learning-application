@@ -38,7 +38,7 @@ Important Code for Frontend:
 - Step 3: Install the npm modules required for the project with npm i
 
 # ▶ How to Run App
-cd online-learning-application -> cd frontend
+cd online-learning-application -> cd frontend-reactjs
 - yarn or npm install
 - yarn or npm run start
 
