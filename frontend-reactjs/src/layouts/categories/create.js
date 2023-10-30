@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -16,33 +15,40 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
+// call service
+import CategoryService from "service/categoryService";
+
 function Create() {
-  const [title, setTitle] = useState("");
-  const [logo, setLogo] = useState("");
-  const [decription, setDecription] = useState("");
+  const [datas, setDatas] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    try {
-      const response = await axios({
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-        url: `${baseURL}/categories`,
-      });
-
-      if (response.status === 200) {
-        console.log("==response==", response);
-        return response.data;
+    const form = new FormData(event.currentTarget);
+    const body = {};
+    for (const [key, value] of form.entries()) {
+      if (value.name != undefined) {
+        body[key] = value.name;
+      } else {
+        body[key] = value;
       }
-    } catch (error) {
-      console.error("==error==", error);
-      throw error;
     }
+    // console.log("==body==", body);
+    await CategoryService.add(body)
+      .then((res) => {
+        console.log("===res.data=", res);
+        if (res.status === 200 || res.status === 201) {
+          // console.log("===res.data=", res.data.data);
+          setDatas(res.data.data);
+          navigate("/category");
+        }
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
   };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -57,13 +63,12 @@ function Create() {
                       Title:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setTitle(e.target.value)}
                       required
                       variant="outlined"
                       color="secondary"
                       type="text"
                       fullWidth
-                      value={title}
+                      name="title"
                     />
                   </MDBox>
                   {/* <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" /> */}
@@ -72,12 +77,11 @@ function Create() {
                       Logo:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setLogo(e.target.value)}
                       variant="outlined"
                       color="secondary"
                       type="file"
                       accept="image/png, image/jpeg"
-                      value={logo}
+                      name="pictureUrls"
                       fullWidth
                     />
                   </MDBox>
@@ -85,14 +89,19 @@ function Create() {
                     <MDTypography variant="h6" mt={3}>
                       Decription:
                     </MDTypography>
-                    <MDInput
-                      onChange={(e) => setDecription(e.target.value)}
-                      variant="outlined"
+                    <textarea
                       color="secondary"
-                      type="text"
-                      value={decription}
-                      fullWidth
-                      hidden
+                      name="decription"
+                      rows="5"
+                      cols="33"
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        backgroundColor: "transparent",
+                        fontSize: "0.875rem",
+                        borderRadius: "0.375rem",
+                        borderColor: "#ccc",
+                      }}
                     />
                   </MDBox>
                   <MDBox mt={4} mb={1} xs={3}>

@@ -17,21 +17,8 @@ import DataTable from "examples/Tables/DataTable";
 // Data
 import categoryTableData from "layouts/tables/data/categoryTableData";
 
-// call service
-import CategoryService from "service/categoryService";
-
 function Category() {
   const { columns, rows } = categoryTableData();
-
-  useEffect(() => {
-    loadCategory();
-  }, []);
-
-  console.log("===CategoryService==", CategoryService.getAll());
-  const loadCategory = async () => {
-    const response = await CategoryService.getAll();
-    console.log("fetchCategory http ===>", response.data.data);
-  };
 
   return (
     <DashboardLayout>
@@ -68,9 +55,9 @@ function Category() {
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
+                  isSorted={true}
+                  entriesPerPage={true}
+                  showTotalEntries={true}
                   noEndBorder
                 />
               </MDBox>

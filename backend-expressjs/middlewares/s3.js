@@ -26,6 +26,15 @@ function uploadFile(file) {
     return s3.upload(uploadParams).promise(); // this will upload file to S3
 }
 
+function uploadFileLocal(file) {
+    const fileStream = fs.createReadStream(file.path);
+    const uploadParams = {
+        Body: fileStream,
+        Key: file.filename,
+    };
+    return fs.upload(uploadParams).promise(); // this will upload file to S3
+}
+
 // DOWNLOAD FILE FROM S3
 function getFileStream(fileKey) {
     const downloadParams = {
@@ -34,4 +43,4 @@ function getFileStream(fileKey) {
     };
     return s3.getObject(downloadParams).createReadStream();
 }
-module.exports = { uploadFile, getFileStream };
+module.exports = { uploadFile, uploadFileLocal, getFileStream };

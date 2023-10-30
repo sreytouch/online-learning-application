@@ -8,7 +8,10 @@ const categoryModels = new Schema({
     },
     pictureUrls: [{
         type: String,
-    }]
+    }],
+    decription: {
+        type: String,
+    }
 })
 
 const Category = mongoose.model('Category', categoryModels);

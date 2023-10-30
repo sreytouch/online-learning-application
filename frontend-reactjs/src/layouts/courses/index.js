@@ -35,7 +35,7 @@ function Course() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  List Course
+                  List Courses
                 </MDTypography>
                 <MDTypography display="block" variant="h6" color="white">
                   <MDBadge
@@ -52,9 +52,9 @@ function Course() {
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
+                  isSorted={true}
+                  entriesPerPage={true}
+                  showTotalEntries={true}
                   noEndBorder
                 />
               </MDBox>

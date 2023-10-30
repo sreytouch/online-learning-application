@@ -1,6 +1,7 @@
 const Category = require('../models/categoryModels');
 const Role = require('../_helpers/roles');
 const categoryService = require('../services/categoryService');
+const { uploadFile } = require("../middlewares/s3");
 const fs = require("fs");
 const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
@@ -31,33 +32,26 @@ async function getCategoryById(req, res, next) {
 }
 
 
-// Todo: parse the req.body only allow roles to be added by admin
-async function createCategory(req, res, next) {
+async function createRoom(req, res, next) {
     try {
-        const { title, pictureUrls } = req.body;
-        // const categoryData = {
-        //     title: title,
-        //     pictureUrls: pictureUrls
-        // }
-        // await categoryService.addNewCategory(categoryData).then(category => {
-        //     res.status(201).json({
-        //         message: `Category created successfully`,
-        //         data: category
-        //     });
-        // }).catch(err => {
-        //     throw err;
-        // });
+        const { roomNumber, building, floor, isAccessible, maxOccupancy, roomType, pricePerNight, pictureUrl } = req.body;
 
         await uploadFile(req.file).then(async (result) => {
-            const category = await Category.create({
-                title: title,
+            const room = await Room.create({
+                building: building,
+                roomNumber: roomNumber,
+                floor: floor,
+                isAccessible: (isAccessible) ? true : false,
+                roomType: roomType,
+                pricePerNight: pricePerNight,
+                maxOccupancy: maxOccupancy,
                 pictureUrls: [result.Location]
             });
             // Deleting from local if uploaded in S3 bucket
             await unlinkFile(req.file.path);
             res.status(201).json({
-                message: `Category created successfully`,
-                data: category
+                message: `Room created successfully`,
+                data: room
             });
         }).catch(err => {
             console.log(err);
@@ -66,6 +60,48 @@ async function createCategory(req, res, next) {
                 error: true
             });
         });
+    } catch (err) {
+        next(err);
+    }
+}
+
+// Todo: parse the req.body only allow roles to be added by admin
+async function createCategory(req, res, next) {
+    try {
+        const { title, pictureUrls, decription } = req.body;
+        const categoryData = {
+            title: title,
+            pictureUrls: pictureUrls,
+            decription: decription
+        }
+        await categoryService.addNewCategory(categoryData).then(category => {
+            res.status(201).json({
+                message: `Category created successfully`,
+                data: category
+            });
+        }).catch(err => {
+            throw err;
+        });
+
+        // await uploadFile(req.file).then(async (result) => {
+        //     const category = await Category.create({
+        //         title: title,
+        //         pictureUrls: [result.Location],
+        //         decription: decription
+        //     });
+        //     // Deleting from local if uploaded in S3 bucket
+        //     await unlinkFile(req.file.path);
+        //     res.status(201).json({
+        //         message: `Category created successfully`,
+        //         data: category
+        //     });
+        // }).catch(err => {
+        //     console.log(err);
+        //     res.status(201).json({
+        //         message: `Problem uploading file`,
+        //         error: true
+        //     });
+        // });
     } catch (err) {
         next(err);
     }
