@@ -38,7 +38,12 @@ Important Code for Frontend:
 - Step 3: Install the npm modules required for the project with npm i
 
 # ▶ How to Run App
-cd react-native-book-app -> cd frontend
+cd online-learning-application -> cd frontend
+- yarn or npm install
+- yarn or npm run start
+
+
+cd online-learning-application -> cd mobile-react-native
 - yarn or npm install
 - yarn or npm run start
 
@@ -47,13 +52,6 @@ cd react-native-book-app -> cd frontend
 - for Android: npm run android
 - for Web: npm run web
 
-cd react-native-book-app -> cd backend
+cd online-learning-application -> cd backend-expressjs
 - yarn or npm install
 - yarn or npm run dev
-
-# We have 5 apis for backend
-- get all books => http://localhost:3000/books 
-- get book by id => http://localhost:3000/book/id
-- post book => http://localhost:3000/book
-- put book => http://localhost:3000/book/id 
-- delete book => http://localhost:3000/book/id 
