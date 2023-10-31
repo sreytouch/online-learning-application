@@ -2,8 +2,6 @@ const expect = require("chai").expect;
 const request = require("request");
 const services = require('../app');
 
-console.log("==services==", services);
-
 
 describe("TESTS CODE OF SERVER ONLINE LEARNING", function () {
     // test Login       -------------------------------------------------------------------

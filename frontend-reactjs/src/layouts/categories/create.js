@@ -34,12 +34,9 @@ function Create() {
         body[key] = value;
       }
     }
-    // console.log("==body==", body);
     await CategoryService.add(body)
       .then((res) => {
-        console.log("===res.data=", res);
         if (res.status === 200 || res.status === 201) {
-          // console.log("===res.data=", res.data.data);
           setDatas(res.data.data);
           navigate("/category");
         }

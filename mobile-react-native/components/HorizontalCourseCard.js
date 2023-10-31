@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 
 import {
     IconLabel
-} from "../components";
+} from ".";
 import { SIZES, COLORS, FONTS, icons } from "../constants";
 
 const HorizontalCourseCard = ({ containerStyle, course, appTheme, onPress }) => {

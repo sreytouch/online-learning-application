@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -13,7 +13,27 @@ import {
 } from "../../components";
 import { COLORS, FONTS, SIZES, icons, constants } from '../../constants';
 
+// call service
+import CategoryService from "../../service/categoryService";
+
 const CategoryOption = ({ category, isSelected, onPress, appTheme }) => {
+    const [datas, setData] = useState([]);
+
+    useEffect(() => {
+        const loadCategory = async () => {
+            const response = await CategoryService.getAll();
+            console.log("===response===", response);
+            const item = response.data.data;
+            setData([...datas, item]);
+        };
+
+        loadCategory();
+    }, []);
+    
+    // const loadCategory = () => {
+        
+    // };
+
     return (
         <TouchableOpacity
             style={{
@@ -31,7 +51,7 @@ const CategoryOption = ({ category, isSelected, onPress, appTheme }) => {
             onPress={onPress}
         >
             <Image
-                source={category.icon}
+                source={constants.icon_education.icon}
                 resizeMode="contain"
                 style={{
                     width: 40,

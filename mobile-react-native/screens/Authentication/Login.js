@@ -10,10 +10,13 @@ import { connect } from "react-redux";
 import {
     FormInput,
     IconButton,
-    IconLabelButton,
     TextButton,
 } from "../../components";
 import { COLORS, FONTS, SIZES, images, icons } from "../../constants";
+
+// call service
+import { loginService } from "../../service/authService";
+import * as SecureStore from 'expo-secure-store';
 
 const Login = ({ navigation, appTheme }) => {
 
@@ -67,6 +70,30 @@ const Login = ({ navigation, appTheme }) => {
         )
     }
 
+    function setToken(token) {
+        return SecureStore.setItemAsync('secure_token', token);
+    };
+
+    function onsubmit(event){
+        event.preventDefault();
+        const body = {
+            "email": username,
+            "password": password
+        }
+        loginService(body)
+            .then((res) => {
+                if (res.status === 200) {
+                    const token = res.data.token;
+                    setToken(token);
+                    navigation.navigate("Walkthrough");
+                }
+            })
+            .catch((e) => {
+                alert(e.message);
+            });
+        
+    }
+
     function renderButtons() {
         return (
             <View>
@@ -80,6 +107,7 @@ const Login = ({ navigation, appTheme }) => {
                     }}
                     label="LOGIN"
                     // onPress={() => navigation.navigate("Walkthrough")}
+                    onPress={(event) => onsubmit(event)}
                 />
 
                 {/* Divider */}

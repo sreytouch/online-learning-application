@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 // @mui material components
@@ -17,12 +17,15 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 // call service
 import CourseService from "service/courseService";
+import CategoryService from "service/categoryService";
 
 function Create() {
-  const [datas, setDatas] = useState([]);
+  const [datas, setData] = useState([]);
+  useEffect(() => {
+    loadCategory();
+  }, []);
 
   const navigate = useNavigate();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
@@ -34,19 +37,21 @@ function Create() {
         body[key] = value;
       }
     }
-    // console.log("==body==", body);
     await CourseService.add(body)
       .then((res) => {
-        console.log("===res.data=", res);
         if (res.status === 200 || res.status === 201) {
-          // console.log("===res.data=", res.data.data);
-          setDatas(res.data.data);
           navigate("/course");
         }
       })
       .catch((e) => {
         alert(e.message);
       });
+  };
+
+  const loadCategory = async () => {
+    const response = await CategoryService.getAll();
+    const item = response.data.data;
+    setData([...datas, item]);
   };
 
   return (
@@ -87,10 +92,12 @@ function Create() {
                         borderColor: "#ccc",
                       }}
                     >
-                      <option value="category1">category 1</option>
-                      <option value="category2">category 2</option>
-                      <option value="category3">category 3</option>
-                      <option value="category4">category 4</option>
+                      {datas[0] &&
+                        datas[0].map((datas) => (
+                          <option key={datas._id} value={datas.title}>
+                            {datas.title}
+                          </option>
+                        ))}
                     </select>
                   </MDBox>
                   <MDBox mb={2}>

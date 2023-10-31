@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 import { Link, Navigate } from "react-router-dom";
-
 import { useEffect, useRef, useState } from "react";
 
 // Material Dashboard 2 React components
@@ -37,7 +36,7 @@ export default function CategoryTableData() {
             display="block"
             variant="button"
             fontWeight="medium"
-            style={{ padding: "10px 0 20px 0", border: "1px #ccc" }}
+            style={{ padding: "10px 0 20px 0" }}
           >
             {datas.title}
           </MDTypography>
@@ -54,7 +53,7 @@ export default function CategoryTableData() {
             display="block"
             variant="button"
             fontWeight="medium"
-            style={{ padding: "5px 0 8px 0", border: "1px #ccc" }}
+            style={{ padding: "5px 0 8px 0" }}
           >
             <MDAvatar src={image} name={name} size="sm" />
           </MDTypography>
@@ -71,7 +70,7 @@ export default function CategoryTableData() {
               display="block"
               variant="button"
               fontWeight="medium"
-              style={{ padding: "10px 0 20px 0", border: "1px #ccc" }}
+              style={{ padding: "10px 0 20px 0" }}
             >
               {datas.decription}
             </MDTypography>
@@ -89,7 +88,7 @@ export default function CategoryTableData() {
             display="block"
             variant="button"
             fontWeight="medium"
-            style={{ padding: "10px 0 20px 0", border: "1px #ccc" }}
+            style={{ padding: "10px 0 20px 0" }}
           >
             <MDBadge
               component={Link}

@@ -10,19 +10,15 @@ import { COLORS, SIZES, constants, FONTS } from "../../constants";
 import { connect } from "react-redux";
 
 const Walkthrough = ({ navigation, appTheme }) => {
-
     const flatListRef = React.useRef()
     const scrollX = React.useRef(new Animated.Value(0)).current;
-
     const [currentIndex, setCurrentIndex] = React.useState(0)
-
     const onViewChangeRef = React.useRef(({ viewableItems, changed }) => {
         setCurrentIndex(viewableItems[0].index)
     })
-
+    
     const Dots = () => {
         const dotPosition = Animated.divide(scrollX, SIZES.width)
-
         return (
             <View
                 style={{
@@ -132,9 +128,7 @@ const Walkthrough = ({ navigation, appTheme }) => {
                     },
                 )}
                 renderItem={({ item, index }) => {
-
                     const inputRange = [(index - 1) * SIZES.width, index * SIZES.width, (index + 1) * SIZES.width];
-
                     const imageScale = scrollX.interpolate({
                         inputRange,
                         outputRange: [0.9, 1, 0.9],
@@ -175,7 +169,6 @@ const Walkthrough = ({ navigation, appTheme }) => {
                             >
                                 {item.sub_title}
                             </Animated.Text>
-
                             <Animated.Image
                                 source={item.image}
                                 resizeMode="contain"

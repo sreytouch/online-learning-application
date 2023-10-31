@@ -19,14 +19,14 @@ const walkthrough = [
     {
         id: 1,
         title: "Explore Online Courses",
-        sub_title: "All types of educational & professional courses available online.",
-        image: require("../assets/images/work.png")
+        sub_title: "All courses from beginner to advanced.",
+        image: require("../assets/images/promo.png")
     },
     {
         id: 2,
         title: "Explore Online Courses",
-        sub_title: "All types of educational & professional courses available online.",
-        image: require("../assets/images/work.png")
+        sub_title: "Enjoy your study!",
+        image: require("../assets/images/start_learning.png")
     },
 ]
 
@@ -177,7 +177,10 @@ const course_details_tabs = [
     }
 ]
 
+const icon_education = { icon: require("../assets/icons/education.png") }
+
 export default {
+    icon_education,
     register_options,
     walkthrough,
     categories,
