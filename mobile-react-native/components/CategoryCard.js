@@ -26,7 +26,7 @@ const CategoryCard = ({ sharedElementPrefix, category, containerStyle, onPress }
                 style={[StyleSheet.absoluteFillObject]}
             >
                 <Image
-                    source={category?.thumbnail}
+                    source={require("../assets/images/bg_4.png")}
                     resizeMode="cover"
                     style={{
                         height: "100%",
@@ -50,7 +50,7 @@ const CategoryCard = ({ sharedElementPrefix, category, containerStyle, onPress }
                     <Text
                         style={{
                             position: 'absolute',
-                            color: COLORS.white, ...FONTS.h2
+                            color: COLORS.lightGray, ...FONTS.h3
                         }}
                     >
                         {category?.title}

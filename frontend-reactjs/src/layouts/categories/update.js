@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -16,13 +15,47 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
+// call service
+import CategoryService from "service/categoryService";
+
 function Update() {
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
   const [decription, setDecription] = useState("");
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    loadCategory();
+  }, []);
+
+  const loadCategory = async () => {
+    const response = await CategoryService.getById(params._id);
+    const item = response.data.data;
+    setTitle(item.title);
+    setDecription(item.decription);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const body = {};
+    for (const [key, value] of form.entries()) {
+      if (value.name != undefined) {
+        body[key] = value.name;
+      } else {
+        body[key] = value;
+      }
+    }
+    await CategoryService.update(params._id, body)
+      .then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          navigate("/category");
+        }
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
   };
   return (
     <DashboardLayout>
@@ -45,6 +78,7 @@ function Update() {
                       type="text"
                       fullWidth
                       value={title}
+                      name="title"
                     />
                   </MDBox>
                   <MDBox mb={2}>
@@ -53,12 +87,12 @@ function Update() {
                     </MDTypography>
                     <MDInput
                       onChange={(e) => setIcon(e.target.value)}
-                      required
                       variant="outlined"
                       color="secondary"
                       type="file"
                       value={icon}
                       fullWidth
+                      name="icon"
                     />
                   </MDBox>
                   <MDBox mb={2}>
@@ -67,13 +101,12 @@ function Update() {
                     </MDTypography>
                     <MDInput
                       onChange={(e) => setDecription(e.target.value)}
-                      required
                       variant="outlined"
                       color="secondary"
                       type="text"
                       value={decription}
                       fullWidth
-                      hidden
+                      name="decription"
                     />
                   </MDBox>
                   <MDBox mt={4} mb={1} xs={3}>

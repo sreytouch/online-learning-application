@@ -12,6 +12,7 @@ import CategoryEdit from "layouts/categories/update";
 import Course from "layouts/courses";
 import CourseAdd from "layouts/courses/create";
 import CourseEdit from "layouts/courses/update";
+import CourseViewDetail from "layouts/courses/detail";
 // @mui icons
 import Icon from "@mui/material/Icon";
 
@@ -93,7 +94,7 @@ const routes = [
     // name: "Category",
     key: "category",
     // icon: <Icon fontSize="small">category</Icon>,
-    route: "/category/edit",
+    route: "/category/edit/:_id",
     component: <CategoryEdit />,
   },
   {
@@ -117,8 +118,16 @@ const routes = [
     // name: "course",
     key: "course",
     // icon: <Icon fontSize="small">course</Icon>,
-    route: "/course/edit",
+    route: "/course/edit/:_id",
     component: <CourseEdit />,
+  },
+  {
+    // type: "collapse",
+    // name: "course",
+    key: "course",
+    // icon: <Icon fontSize="small">course</Icon>,
+    route: "/course/detail/:_id",
+    component: <CourseViewDetail />,
   },
 ];
 

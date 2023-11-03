@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -20,11 +20,37 @@ import {
 import HorizontalCourseCard2 from "../../components/HorizontalCourseCard2";
 import { COLORS, FONTS, SIZES, icons, dummyData } from "../../constants";
 
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+const baseUrlCourse = 'http://localhost:8000/api/v1/courses';
+
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const HEADER_HEIGHT = 190;
 
 const PopularCourses = ({ navigation, appTheme }) => {
+
+    const [dataCourse, setDataCourse] = useState([]);
+
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+        const loadCourse = async () => {
+            await axios.get(baseUrlCourse , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setDataCourse([...dataCourse, item]);
+              }); 
+        };
+
+        loadCourse();
+    }, []);
+    // console.log("===dataCourse[0]==", dataCourse[0])
 
     const scrollY = useSharedValue(0);
     const onScroll = useAnimatedScrollHandler((event) => {
@@ -128,7 +154,7 @@ const PopularCourses = ({ navigation, appTheme }) => {
             }}
         >
             <AnimatedFlatList
-                data={dummyData.courses_list_2}
+                data={dataCourse[0]}
                 listKey="PopularCourses"
                 keyExtractor={item => `PopularCourses-${item.id}`}
                 showsVerticalScrollIndicator={false}

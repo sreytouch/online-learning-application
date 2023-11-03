@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
     View,
     Text,
@@ -22,7 +23,7 @@ const VerticalCourseCard = ({ containerStyle, course, appTheme }) => {
         >
             {/* Thumbnail */}
             <Image
-                source={course.thumbnail}
+                source={require("../assets/images/thumbnail_1.png")}
                 resizeMode="cover"
                 style={{
                     width: "100%",
@@ -79,7 +80,7 @@ const VerticalCourseCard = ({ containerStyle, course, appTheme }) => {
 
                     <IconLabel
                         icon={icons.time}
-                        label={course.duration}
+                        label={moment(course.dateTime).utc().format('YYYY-MM-DD')}
                         containerStyle={{
                             marginTop: SIZES.base
                         }}

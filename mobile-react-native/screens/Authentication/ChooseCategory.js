@@ -14,26 +14,12 @@ import {
 import { COLORS, FONTS, SIZES, icons, constants } from '../../constants';
 
 // call service
-import CategoryService from "../../service/categoryService";
+// import CategoryService from "../../service/categoryService";
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+const baseUrl = 'http://localhost:8000/api/v1/categories';
 
 const CategoryOption = ({ category, isSelected, onPress, appTheme }) => {
-    const [datas, setData] = useState([]);
-
-    useEffect(() => {
-        const loadCategory = async () => {
-            const response = await CategoryService.getAll();
-            console.log("===response===", response);
-            const item = response.data.data;
-            setData([...datas, item]);
-        };
-
-        loadCategory();
-    }, []);
-    
-    // const loadCategory = () => {
-        
-    // };
-
     return (
         <TouchableOpacity
             style={{
@@ -70,7 +56,7 @@ const CategoryOption = ({ category, isSelected, onPress, appTheme }) => {
                     fontSize: 14
                 }}
             >
-                {category?.label}
+                {category?.title}
             </Text>
         </TouchableOpacity>
     )
@@ -79,6 +65,31 @@ const CategoryOption = ({ category, isSelected, onPress, appTheme }) => {
 const ChooseCategory = ({ navigation, appTheme }) => {
 
     const [selectedCategories, setSelectedCategories] = useState([])
+    const [datas, setData] = useState([]);
+
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+
+        const loadCategory = async () => {
+            // const response = await CategoryService.getAll();
+            // const item = response.data.data;
+            // setData([...datas, item]);
+
+            await axios.get(baseUrl , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setData([...datas, item]);
+              }); 
+        };
+
+        loadCategory();
+    }, []);
 
     function renderCategories() {
         return (
@@ -107,7 +118,8 @@ const ChooseCategory = ({ navigation, appTheme }) => {
                             marginTop: SIZES.height > 800 ? SIZES.padding : SIZES.radius
                         }}
                     >
-                        {constants.categories.map((item, index) => {
+                        {datas[0] && datas[0].map((item, index) => {
+                            // console.log("===constants.categories===", constants.categories)
                             return (
                                 <CategoryOption
                                     key={`Category-${index}`}

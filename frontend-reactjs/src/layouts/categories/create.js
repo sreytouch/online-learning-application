@@ -19,8 +19,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import CategoryService from "service/categoryService";
 
 function Create() {
-  const [datas, setDatas] = useState([]);
-
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -37,7 +35,6 @@ function Create() {
     await CategoryService.add(body)
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
-          setDatas(res.data.data);
           navigate("/category");
         }
       })

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 // Material Dashboard 2 React components
@@ -8,6 +8,15 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
+
+//dialog-delete
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+//end dialog-delete
 
 // call service
 import CategoryService from "service/categoryService";
@@ -26,6 +35,75 @@ export default function CategoryTableData() {
     const item = response.data.data;
     setData([...datas, item]);
   };
+
+  // dialog-delete
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = async (id) => {
+    console.log("==id==", id);
+    // await CategoryService.remove(id)
+    //   .then((res) => {
+    //     if (res.status === 200 || res.status === 201) {
+    //       navigate("/course");
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     alert(e.message);
+    //   });
+  };
+
+  const DialogDelete = ({ deletedID }) => {
+    return (
+      <>
+        <Button
+          onClick={handleClickOpen}
+          color="error"
+          variant="gradient"
+          size="sm"
+          style={{
+            padding: "4px 0",
+            fontSize: "8px",
+            textAlign: "center",
+            borderRadius: "0.375rem",
+            background: "linear-gradient(195deg, #EF5350, #E53935)",
+            color: "#ffffff",
+            marginLeft: "0.5rem",
+          }}
+        >
+          DELETE
+        </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Do you want to delete this record ?"}</DialogTitle>
+          <DialogActions>
+            <Button onClick={handleClose} style={{ background: "orange", color: "white" }}>
+              Cancel
+            </Button>
+            {/* <Button onClick={handleClose} autoFocus> */}
+            <Button
+              // onClick={handleDelete(deletedID)}
+              style={{ background: "red", color: "white" }}
+              onClick={handleClose}
+              autoFocus
+            >
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </>
+    );
+  };
+  //end dialog-delete
 
   const Title = () =>
     datas[0] &&
@@ -92,20 +170,22 @@ export default function CategoryTableData() {
           >
             <MDBadge
               component={Link}
-              to="/category/edit"
+              to={"/category/edit/" + datas._id}
               badgeContent={edited}
               color="success"
               variant="gradient"
               size="sm"
             />
-            <MDBadge
+            {/* <MDBadge
               component={Link}
-              to="/category/delete"
+              to={"/category/delete/" + datas._id}
               badgeContent={deleted}
               color="error"
               variant="gradient"
               size="sm"
-            />
+            /> */}
+
+            <DialogDelete deletedID={datas._id} />
           </MDTypography>
         </MDBox>
       </MDBox>

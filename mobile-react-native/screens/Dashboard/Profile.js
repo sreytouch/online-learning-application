@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -21,14 +21,44 @@ import {
 } from "../../components";
 import { COLORS, FONTS, SIZES, icons, images } from "../../constants";
 
+// call service
+// import CategoryService from "../../service/categoryService";
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+
 const Profile = ({ appTheme, toggleTheme }) => {
     const navigation = useNavigation();
-
     const [newCourseNotification, setNewCourseNotification] = useState(false)
     const [studyReminder, setStudyReminder] = useState(false)
+    const [dataUser, setDataUser] = useState([]);
+
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+        const userId = () => {
+            return SecureStore.getItemAsync('user_id');
+        };
+
+        const loadUser = async () => {
+            const baseUrlUsers = 'http://localhost:8000/api/v1/users/'+ await userId();
+            await axios.get(baseUrlUsers , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data; 
+                setDataUser([...dataUser, item]);
+              }); 
+        };
+        loadUser();
+    }, []);
+    // console.log("===dataUser[0]===", dataUser[0])
+
+
 
     // Handler
-
     function toggleThemeHandler() {
         if (appTheme?.name == "light") {
             toggleTheme("dark")
@@ -38,7 +68,6 @@ const Profile = ({ appTheme, toggleTheme }) => {
     }
 
     // Render
-
     function renderHeader() {
         return (
             <View
@@ -145,7 +174,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                             ...FONTS.h2
                         }}
                     >
-                        Jessica Lang
+                        {dataUser[0] && (dataUser[0].firstName + " " + dataUser[0].lastName)}
                     </Text>
 
                     <Text
@@ -185,7 +214,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                                 ...FONTS.body4
                             }}
                         >
-                            58%
+                            89%
                         </Text>
                     </View>
                 </View>
@@ -201,7 +230,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.profile}
                     label="Name"
-                    value="Jessica Lang"
+                    value={dataUser[0] && (dataUser[0].firstName + " " + dataUser[0].lastName)}
                 />
 
                 <LineDivider />
@@ -209,7 +238,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.email}
                     label="Email"
-                    value="sreytouch.lang95@gmail.com"
+                    value={dataUser[0] && dataUser[0].email}
                 />
 
                 <LineDivider />
@@ -225,7 +254,7 @@ const Profile = ({ appTheme, toggleTheme }) => {
                 <ProfileValue
                     icon={icons.call}
                     label="Contact Number"
-                    value="+60123456789"
+                    value= {dataUser[0] && ("+1" + dataUser[0].phone)}
                 />
             </View>
         )

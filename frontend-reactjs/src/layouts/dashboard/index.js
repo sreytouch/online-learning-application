@@ -25,7 +25,7 @@ function Dashboard() {
       <DashboardNavbar />
       <MDBox py={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
@@ -40,7 +40,7 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
@@ -54,7 +54,7 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
@@ -69,7 +69,7 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
@@ -84,11 +84,40 @@ function Dashboard() {
               />
             </MDBox>
           </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="dark"
+                icon="weekend"
+                title="Courses"
+                count={281}
+                percentage={{
+                  color: "success",
+                  amount: "+55%",
+                  label: "than lask week",
+                }}
+              />
+            </MDBox>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                icon="leaderboard"
+                title="Dowload Documents"
+                count="2,300"
+                percentage={{
+                  color: "success",
+                  amount: "+3%",
+                  label: "than last month",
+                }}
+              />
+            </MDBox>
+          </Grid>
         </Grid>
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={12} lg={12}>
-              <Projects />
+              {/* <Projects /> */}
             </Grid>
           </Grid>
         </MDBox>

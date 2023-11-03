@@ -112,7 +112,7 @@ const courses_list_2 = [
 const top_searches = [
     {
         id: 0,
-        label: "Sketch"
+        label: "Algorithem"
     },
     {
         id: 1,
@@ -129,18 +129,14 @@ const top_searches = [
     {
         id: 4,
         label: "Mobile"
-    },
-    {
-        id: 5,
-        label: "Animation"
-    },
+    }
 ]
 
 const course_details = {
     id: 0,
-    title: "The Ultimate Ui/Ux Course Beginner to Advanced",
-    number_of_students: "33.5k Students",
-    duration: "2h 30m",
+    title: "Mobile(React Native) Course Beginner to Advanced",
+    number_of_students: "33.5k views",
+    duration: "7h 30m",
     instructor: {
         name: "Sreytouch",
         title: "Full Stack Programmer"
@@ -212,95 +208,88 @@ const course_details = {
     files: [
         {
             id: 0,
-            name: "UI Fundamentals",
+            name: "Web Fundamentals",
             author: "Shared by Dummy Data",
             upload_date: "13th Sep 2021",
             thumbnail: require("../assets/images/pdf.png")
         },
         {
             id: 1,
-            name: "UX Checklist",
+            name: "Mobile Checklist",
             author: "Shared by Dummy Data",
             upload_date: "11th Sep 2021",
             thumbnail: require("../assets/images/doc.png")
-        },
-        {
-            id: 2,
-            name: "Sketch File",
-            author: "Shared by Dummy Data",
-            upload_date: "7th Sep 2021",
-            thumbnail: require("../assets/images/sketch.png")
         }
     ],
     discussions: [
         {
             id: 0,
-            profile: require("../assets/images/profile.png"),
-            name: "Dummy Data",
+            profile: require("../assets/images/student_1.png"),
+            name: "User Dummy",
             no_of_comments: "11 comments",
             no_of_likes: "72 likes",
             posted_on: "5 days ago",
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            comment: "I do not understand about ... ,  what is that?",
             replies: [
                 {
                     id: 0,
-                    profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    profile: require("../assets/images/student_2.png"),
+                    name: "Admin Dummy",
                     posted_on: "4 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
                 {
                     id: 1,
-                    profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    profile: require("../assets/images/student_2.png"),
+                    name: "Admin Dummy",
                     posted_on: "4 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
                 {
                     id: 2,
-                    profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    profile: require("../assets/images/student_2.png"),
+                    name: "Admin Dummy",
                     posted_on: "4 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
                 {
                     id: 3,
-                    profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    profile: require("../assets/images/student_2.png"),
+                    name: "Admin Dummy",
                     posted_on: "4 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
             ]
         },
         {
             id: 1,
-            profile: require("../assets/images/profile.png"),
-            name: "Dummy Data",
+            profile: require("../assets/images/student_2.png"),
+            name: "User Dummy",
             no_of_comments: "21 comments",
             no_of_likes: "372 likes",
             posted_on: "14 days ago",
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            comment: "Can I do ...?",
             replies: [
                 {
                     id: 0,
                     profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    name: "Admin Dummy",
                     posted_on: "7 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
                 {
                     id: 1,
                     profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    name: "Admin Dummy",
                     posted_on: "7 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
                 {
                     id: 2,
                     profile: require("../assets/images/student_1.png"),
-                    name: "Dummy Data",
+                    name: "Admin Dummy",
                     posted_on: "7 days ago",
-                    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    comment: "yes, it is.",
                 },
             ]
         }
@@ -314,7 +303,7 @@ const notificationByDays = [
             {
                 id: 1,
                 avatar: require("../assets/images/student_1.png"),
-                name: "Admin",
+                name: "Admin Dummy",
                 created_at: "2h 47m ago",
                 message: "Asked to join online courses regarding professional web designing."
             },
@@ -341,7 +330,7 @@ const notificationByDays = [
             {
                 id: 4,
                 avatar: require("../assets/images/student_1.png"),
-                name: "Admin",
+                name: "Admin Dummy",
                 created_at: "16h 47m ago",
                 message: "You just signed in from another device check inbox for more details."
             },
@@ -392,12 +381,12 @@ const membershipPans = [
 
 const instructorProfile = {
     id: 1,
-    name: "Dummy Data",
+    name: "Jessica Dummy Data",
     title: "Full Stack Programmers",
-    avatar: require("../assets/images/profile.png"),
+    avatar: require("../assets/images/student_3.png"),
     isVerified: true,
 
-    aboutMe: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    aboutMe: "yes, it is., sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id: est laborum.",
     
     stats:[
         {
@@ -499,21 +488,21 @@ const instructorProfile = {
             profile: require("../assets/images/student_1.png"),
             name: "John Wick",
             posted_on: "2 days ago",
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            comment: "yes, it is. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id: est laborum.",
         },
         {
             id: 2,
             profile: require("../assets/images/student_2.png"),
             name: "Harry Potter",
             posted_on: "7 days ago",
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            comment: "yes, it is. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id: est laborum.",
         },
         {
             id: 3,
             profile: require("../assets/images/student_3.png"),
             name: "Lilian Ellis",
             posted_on: "10 days ago",
-            comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            comment: "yes, it is. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id: est laborum.",
         },  
     ],
     socialMedias: [

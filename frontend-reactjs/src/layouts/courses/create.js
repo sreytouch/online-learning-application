@@ -102,7 +102,33 @@ function Create() {
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
-                      image:
+                      Logo:
+                    </MDTypography>
+                    <MDInput
+                      variant="outlined"
+                      color="secondary"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      name="pictureUrls"
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" mt={3}>
+                      Chapters:
+                    </MDTypography>
+                    <MDInput
+                      variant="outlined"
+                      color="secondary"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      name="pictureUrls"
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" mt={3}>
+                      File Document:
                     </MDTypography>
                     <MDInput
                       variant="outlined"

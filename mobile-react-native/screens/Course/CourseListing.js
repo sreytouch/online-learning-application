@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -30,7 +30,11 @@ import {
 } from "../../components";
 import FilterModal from '../../components/FilterModal';
 import HorizontalCourseCard from '../../components/HorizontalCourseCard';
-import { COLORS, FONTS, SIZES, images, icons, dummyData, constants } from "../../constants";
+import { COLORS, FONTS, SIZES, images, icons } from "../../constants";
+
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+const baseUrlCourse = 'http://localhost:8000/api/v1/courses';
 
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
@@ -48,6 +52,27 @@ const CourseListing = ({ navigation, route, appTheme }) => {
     const headerSharedValue = useSharedValue(80);
     const filterModalSharedValue1 = useSharedValue(SIZES.height);
     const filterModalSharedValue2 = useSharedValue(SIZES.height);
+
+    const [dataCourse, setDataCourse] = useState([]);
+
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+        const loadCourse = async () => {
+            await axios.get(baseUrlCourse , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setDataCourse([...dataCourse, item]);
+              }); 
+        };
+
+        loadCourse();
+    }, []);
 
     // Handler
 
@@ -242,7 +267,7 @@ const CourseListing = ({ navigation, route, appTheme }) => {
         return (
             <AnimatedFlatList
                 ref={flatListRef}
-                data={dummyData.courses_list_2}
+                data={dataCourse[0] && dataCourse[0]}
                 keyExtractor={item => `Results-${item.id}`}
                 contentContainerStyle={{
                     paddingHorizontal: SIZES.padding,

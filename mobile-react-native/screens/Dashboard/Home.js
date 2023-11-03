@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -19,7 +19,12 @@ import {
 
 import VerticalCourseCard from '../../components/VerticalCourseCard';
 import HorizontalCourseCard from '../../components/HorizontalCourseCard';
-import { COLORS, FONTS, SIZES, icons, images, dummyData } from '../../constants';
+import { COLORS, FONTS, SIZES, icons, images } from '../../constants';
+
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+const baseUrlCategory = 'http://localhost:8000/api/v1/categories';
+const baseUrlCourse = 'http://localhost:8000/api/v1/courses';
 
 const Section = ({ containerStyle, title, onPress, children, appTheme }) => {
     return (
@@ -63,6 +68,58 @@ const Section = ({ containerStyle, title, onPress, children, appTheme }) => {
 const Home = ({ appTheme }) => {
 
     const navigation = useNavigation();
+    const [dataUser, setDataUser] = useState([]);
+    const [dataCategory, setDataCategory] = useState([]);
+    const [dataCourse, setDataCourse] = useState([]);
+
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+        const userId = () => {
+            return SecureStore.getItemAsync('user_id');
+        };
+
+        const loadUser = async () => {
+            const baseUrlUsers = 'http://localhost:8000/api/v1/users/'+ await userId();
+            await axios.get(baseUrlUsers , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data; 
+                setDataUser([...dataUser, item]);
+              }); 
+        };
+        const loadCourse = async () => {
+            await axios.get(baseUrlCourse , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setDataCourse([...dataCourse, item]);
+              }); 
+        };
+        const loadCategory = async () => {
+            await axios.get(baseUrlCategory , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setDataCategory([...dataCategory, item]);
+              }); 
+        };
+
+        loadUser();
+        loadCourse();
+        loadCategory();
+    }, []);
+    // console.log("===dataCourse[0]===", dataCourse[0])
 
     function renderHeader() {
         return (
@@ -78,7 +135,8 @@ const Home = ({ appTheme }) => {
                 {/* Greetings */}
                 <View
                     style={{
-                        flex: 1
+                        flex: 1,
+                        paddingTop: 15
                     }}
                 >
                     <Text
@@ -87,7 +145,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.h2
                         }}
                     >
-                        Hello, Jessica!
+                        Hello, {dataUser[0] && dataUser[0].firstName}  {dataUser[0] && dataUser[0].lastName}! 
                     </Text>
                     <Text
                         style={{
@@ -95,7 +153,7 @@ const Home = ({ appTheme }) => {
                             ...FONTS.body3
                         }}
                     >
-                        Thursday, 18th Oct 2022
+                        {new Date().toDateString()}
                     </Text>
                 </View>
 
@@ -186,7 +244,7 @@ const Home = ({ appTheme }) => {
         return (
             <FlatList
                 horizontal={true}
-                data={dummyData.courses_list_1}
+                data={dataCourse[0]}
                 listKey="Courses"
                 keyExtractor={item => `Courses-${item.id}`}
                 showsHorizontalScrollIndicator={false}
@@ -197,7 +255,7 @@ const Home = ({ appTheme }) => {
                     <VerticalCourseCard
                         containerStyle={{
                             marginLeft: index == 0 ? SIZES.padding : SIZES.radius,
-                            marginRight: index == dummyData.courses_list_1.length - 1 ? SIZES.padding : 0
+                            marginRight: index == dataCourse[0].length - 1 ? SIZES.padding : 0
                         }}
                         course={item}
                     />
@@ -215,7 +273,7 @@ const Home = ({ appTheme }) => {
             >
                 <FlatList
                     horizontal={true}
-                    data={dummyData.categories}
+                    data={dataCategory[0]}
                     listKey="Categories"
                     keyExtractor={item => `Categories-${item.id}`}
                     showsHorizontalScrollIndicator={false}
@@ -228,7 +286,7 @@ const Home = ({ appTheme }) => {
                             category={item}
                             containerStyle={{
                                 marginLeft: index == 0 ? SIZES.padding : SIZES.radius,
-                                marginRight: index == dummyData.categories.length - 1 ? SIZES.padding : 0
+                                marginRight: index == dataCategory[0].length - 1 ? SIZES.padding : 0
                             }}
                             onPress={() => navigation.navigate("CourseListing", { category: item, sharedElementPrefix: "Home" })}
                         />
@@ -249,7 +307,7 @@ const Home = ({ appTheme }) => {
                 onPress={() => navigation.navigate("PopularCourses")}
             >
                 <FlatList
-                    data={dummyData.courses_list_2}
+                    data={dataCourse[0]}
                     listKey="PopularCourses"
                     scrollEnabled={false}
                     keyExtractor={item => `PopularCourses-${item.id}`}

@@ -24,7 +24,7 @@ const Login = ({ navigation, appTheme }) => {
     const [password, setPassword] = useState("")
     const [showPass, setShowPass] = useState(false)
 
-    function renderForm() {
+    const renderForm = () => {
         return (
             <View>
                 {/* Username */}
@@ -69,12 +69,12 @@ const Login = ({ navigation, appTheme }) => {
             </View>
         )
     }
+    
+    async function setItem(key, value) {
+        return SecureStore.setItemAsync(key, value);
+    }
 
-    function setToken(token) {
-        return SecureStore.setItemAsync('secure_token', token);
-    };
-
-    function onsubmit(event){
+    const onsubmit = (event) => {
         event.preventDefault();
         const body = {
             "email": username,
@@ -84,7 +84,9 @@ const Login = ({ navigation, appTheme }) => {
             .then((res) => {
                 if (res.status === 200) {
                     const token = res.data.token;
-                    setToken(token);
+                    const user_id = res.data.user_id;
+                    setItem('secure_token', token);
+                    setItem('user_id', user_id);
                     navigation.navigate("Walkthrough");
                 }
             })
@@ -94,7 +96,7 @@ const Login = ({ navigation, appTheme }) => {
         
     }
 
-    function renderButtons() {
+    const renderButtons = () => {
         return (
             <View>
                 {/* Login */}
@@ -206,14 +208,14 @@ const Login = ({ navigation, appTheme }) => {
     )
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         appTheme: state.appTheme,
         error: state.error
     }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
     return {
     }
 }

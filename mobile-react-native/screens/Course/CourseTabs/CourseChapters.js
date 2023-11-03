@@ -91,7 +91,7 @@ const CourseChapters = ({ selectedCourse, appTheme }) => {
                 >
                     {/* Profile Photo */}
                     <Image
-                        source={images.profile}
+                        source={images.student_3}
                         style={{
                             width: 50,
                             height: 50,
@@ -230,7 +230,7 @@ const CourseChapters = ({ selectedCourse, appTheme }) => {
                 }}
             >
                 {/* Section Header */}
-                <View
+                {/* <View
                     style={{
                         flexDirection: 'row',
                         paddingHorizontal: SIZES.padding
@@ -254,10 +254,10 @@ const CourseChapters = ({ selectedCourse, appTheme }) => {
                         }}
                         label="See All"
                     />
-                </View>
+                </View> */}
 
                 {/* Popular Courses List */}
-                <FlatList
+                {/* <FlatList
                     data={dummyData.courses_list_2}
                     listKey="PopularCourses"
                     scrollEnabled={false}
@@ -279,7 +279,7 @@ const CourseChapters = ({ selectedCourse, appTheme }) => {
                     ItemSeparatorComponent={() => (
                         <LineDivider />
                     )}
-                />
+                /> */}
             </View>
         )
     }

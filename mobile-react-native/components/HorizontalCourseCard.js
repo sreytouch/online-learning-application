@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import {
     View,
     Text,
@@ -24,7 +25,7 @@ const HorizontalCourseCard = ({ containerStyle, course, appTheme, onPress }) => 
         >
             {/* Thumbnail */}
             <ImageBackground
-                source={course.thumbnail}
+                source={require("../assets/images/thumbnail_1.png")}
                 resizeMode="cover"
                 style={{
                     width: 130,
@@ -92,12 +93,12 @@ const HorizontalCourseCard = ({ containerStyle, course, appTheme, onPress }) => 
                             ...FONTS.body4
                         }}
                     >
-                        By {course.instructor}
+                        By {course.author}
                     </Text>
 
                     <IconLabel
                         icon={icons.time}
-                        label={course.duration}
+                        label={moment(course.dateTime).utc().format('YYYY-MM-DD')}
                         containerStyle={{
                             marginLeft: SIZES.base
                         }}
@@ -126,12 +127,12 @@ const HorizontalCourseCard = ({ containerStyle, course, appTheme, onPress }) => 
                             color: COLORS.primary
                         }}
                     >
-                        ${course.price.toFixed(2)}
+                        ${course.price}
                     </Text>
 
                     <IconLabel
                         icon={icons.star}
-                        label={course.ratings}
+                        label={course.rate}
                         containerStyle={{
                             marginLeft: SIZES.base
                         }}

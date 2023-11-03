@@ -106,7 +106,7 @@ async function login(req, res, next) {
                     res.status(401).json({ message: `Password didn't matched` });
                 } else {
                     const token = jwt.sign({ user_id: user._id, firstName: user.firstName, email: user.email, role: user.role }, `${process.env.JWT_SECRET}`, { expiresIn: '6h' });
-                    res.status(200).json({ token });
+                    res.status(200).json({ token:token, user_id: user._id });
                 }
             })
         }

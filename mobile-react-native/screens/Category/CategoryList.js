@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     Text,
@@ -26,11 +26,37 @@ import {
     dummyData
 } from "../../constants";
 
+// call service
+// import CategoryService from "../../service/categoryService";
+import * as SecureStore from "expo-secure-store";
+import axios from 'axios';
+const baseUrl = 'http://localhost:8000/api/v1/categories';
+
+
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
 const HEADER_HEIGHT = 190;
 
 const CategoryList = ({ navigation, appTheme }) => {
+    const [datas, setData] = useState([]);
+    useEffect(() => {
+        const getToken = () => {
+            return SecureStore.getItemAsync('secure_token');
+        };
+        const loadCategory = async () => {
+            await axios.get(baseUrl , {
+                headers: {
+                    Authorization: "Bearer " + await getToken(),
+                    ContentType: "application/json",
+                }
+              }).then((response) => {
+                const item = response.data.data;
+                setData([...datas, item]);
+              }); 
+        };
+        loadCategory();
+    }, []);
+    // console.log("---datas---", datas[0]);
 
     const scrollY = useSharedValue(0);
     const onScroll = useAnimatedScrollHandler((event) => {
@@ -134,7 +160,7 @@ const CategoryList = ({ navigation, appTheme }) => {
             }}
         >
             <AnimatedFlatList
-                data={dummyData.categories}
+                data={datas[0] && datas[0]}
                 listKey="Categories"
                 numColumns={2}
                 keyExtractor={item => `Categories-${item.id}`}

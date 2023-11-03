@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -16,14 +15,73 @@ import MDButton from "components/MDButton";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
+// call service
+import CourseService from "service/courseService";
+import CategoryService from "service/categoryService";
+
 function Update() {
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [icon, setIcon] = useState("");
-  const [decription, setDecription] = useState("");
+  const [chapter, setChapter] = useState("");
+  const [fileDocument, setFileDocument] = useState("");
+  const [author, setAuthor] = useState("");
+  const [price, setPrice] = useState("");
+  const [rate, setRate] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [contant, setContant] = useState("");
+  const [datas, setData] = useState([]);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    loadCategory();
+    loadCourse();
+  }, []);
+
+  const loadCategory = async () => {
+    const response = await CategoryService.getAll();
+    const item = response.data.data;
+    setData([...datas, item]);
+  };
+
+  const loadCourse = async () => {
+    const response = await CourseService.getById(params._id);
+    const item = response.data.data;
+    setTitle(item.title);
+    // setCategory(item.title);
+    setIcon(item.pictureUrls);
+    setChapter(item.chapers);
+    setFileDocument(item.files);
+    setAuthor(item.author);
+    setPrice(item.price);
+    setRate(item.rate);
+    setDateTime(item.dateTime);
+    setContant(item.contants);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const body = {};
+    for (const [key, value] of form.entries()) {
+      if (value.name != undefined) {
+        body[key] = value.name;
+      } else {
+        body[key] = value;
+      }
+    }
+    await CourseService.update(params._id, body)
+      .then((res) => {
+        if (res.status === 200 || res.status === 201) {
+          navigate("/course");
+        }
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
   };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -39,25 +97,83 @@ function Update() {
                     </MDTypography>
                     <MDInput
                       onChange={(e) => setTitle(e.target.value)}
+                      value={title}
                       required
                       variant="outlined"
                       color="secondary"
                       type="text"
                       fullWidth
-                      value={title}
+                      name="title"
                     />
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
-                      Icon:
+                      Type Category:
+                    </MDTypography>
+                    <select
+                      onChange={(e) => setCategory(e.target.value)}
+                      // value={category}
+                      name="typeCategory"
+                      id="typeCategory"
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        backgroundColor: "transparent",
+                        fontSize: "0.875rem",
+                        borderRadius: "0.375rem",
+                        borderColor: "#ccc",
+                      }}
+                    >
+                      {datas[0] &&
+                        datas[0].map((datas) => (
+                          <option key={datas._id} value={datas.title}>
+                            {datas.title}
+                          </option>
+                        ))}
+                    </select>
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" mt={3}>
+                      Logo:
                     </MDTypography>
                     <MDInput
                       onChange={(e) => setIcon(e.target.value)}
-                      required
+                      value={icon}
                       variant="outlined"
                       color="secondary"
                       type="file"
-                      value={icon}
+                      accept="image/png, image/jpeg"
+                      name="pictureUrls"
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" mt={3}>
+                      Chapters:
+                    </MDTypography>
+                    <MDInput
+                      onChange={(e) => setChapter(e.target.value)}
+                      value={chapter}
+                      variant="outlined"
+                      color="secondary"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      name="pictureUrls"
+                      fullWidth
+                    />
+                  </MDBox>
+                  <MDBox mb={2}>
+                    <MDTypography variant="h6" mt={3}>
+                      File Document:
+                    </MDTypography>
+                    <MDInput
+                      onChange={(e) => setFileDocument(e.target.value)}
+                      value={fileDocument}
+                      variant="outlined"
+                      color="secondary"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      name="pictureUrls"
                       fullWidth
                     />
                   </MDBox>
@@ -67,13 +183,13 @@ function Update() {
                       Author:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setTitle(e.target.value)}
-                      required
+                      onChange={(e) => setAuthor(e.target.value)}
+                      value={author}
                       variant="outlined"
                       color="secondary"
                       type="text"
                       fullWidth
-                      value={title}
+                      name="author"
                     />
                   </MDBox>
 
@@ -82,13 +198,13 @@ function Update() {
                       Price:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setTitle(e.target.value)}
-                      required
+                      onChange={(e) => setPrice(e.target.value)}
+                      value={price}
                       variant="outlined"
                       color="secondary"
-                      type="text"
+                      type="number"
                       fullWidth
-                      value={title}
+                      name="price"
                     />
                   </MDBox>
 
@@ -97,13 +213,13 @@ function Update() {
                       Rate:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setTitle(e.target.value)}
-                      required
+                      onChange={(e) => setRate(e.target.value)}
+                      value={rate}
                       variant="outlined"
                       color="secondary"
                       type="text"
                       fullWidth
-                      value={title}
+                      name="rate"
                     />
                   </MDBox>
 
@@ -112,28 +228,34 @@ function Update() {
                       Date and Time:
                     </MDTypography>
                     <MDInput
-                      onChange={(e) => setTitle(e.target.value)}
-                      required
+                      onChange={(e) => setDateTime(e.target.value)}
+                      value={dateTime}
                       variant="outlined"
                       color="secondary"
                       type="text"
                       fullWidth
-                      value={title}
+                      name="dateTime"
                     />
                   </MDBox>
                   <MDBox mb={2}>
                     <MDTypography variant="h6" mt={3}>
-                      Decription:
+                      Contants:
                     </MDTypography>
-                    <MDInput
-                      onChange={(e) => setDecription(e.target.value)}
-                      required
-                      variant="outlined"
+                    <textarea
+                      onChange={(e) => setContant(e.target.value)}
+                      value={contant}
                       color="secondary"
-                      type="text"
-                      value={decription}
-                      fullWidth
-                      hidden
+                      name="contants"
+                      rows="5"
+                      cols="33"
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        backgroundColor: "transparent",
+                        fontSize: "0.875rem",
+                        borderRadius: "0.375rem",
+                        borderColor: "#ccc",
+                      }}
                     />
                   </MDBox>
                   <MDBox mt={4} mb={1} xs={3}>

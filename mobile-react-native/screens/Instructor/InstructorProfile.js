@@ -248,7 +248,7 @@ const InstructorProfile = ({ appTheme, navigation }) => {
 
         let totalRatings = (dummyData.instructorProfile.ratings).reduce((a, b) => a + (b.count || 0), 0)
 
-        let totalSatisfiedCount = dummyData.instructorProfile.ratings.filter(a => [1, 2].includes(a.id)).reduce((a, b) => a + (b.count || 0), 0)
+        let totalSatisfiedCount = dummyData.instructorProfile.ratings.filter(a => [1, 2].includes(aid)).reduce((a, b) => a + (b.count || 0), 0)
 
         let totalSatisfiedPerc = (totalSatisfiedCount / totalRatings * 100).toFixed(0)
 
