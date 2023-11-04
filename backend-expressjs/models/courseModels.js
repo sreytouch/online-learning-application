@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const courseModel = new Schema({
     title: {
         type: String,
         required: true
     },
     typeCategory: {
+        // category_id: mongoose.Types.ObjectId,
         type: String,
         required: true
     },

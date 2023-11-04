@@ -2,13 +2,10 @@ const expect = require("chai").expect;
 const request = require("request");
 const services = require('../app');
 
-
 describe("TESTS CODE OF SERVER ONLINE LEARNING", function () {
-    // test Login       -------------------------------------------------------------------
+    // test Category  -------------------------------------------------------------------
     describe("Server-side Category", function () {
-
         var url = "http://localhost:8000/api/v1/users/categories";
-
         it("Empty query should return status 500 and give an empty object", function (done) {
             request(url, function (error, response, body) {
                 expect(response.statusCode).to.equal(500);
